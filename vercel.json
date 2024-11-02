@@ -1,0 +1,8 @@
+{
+	"rewrites": [
+		{
+			"source": "/payment-form/:path*",
+			"destination": "/index.html"
+		}
+	]
+}
