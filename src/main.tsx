@@ -2,23 +2,23 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import PaymentForm from "./components/PaymentForm.tsx";
-import RequestDetails from "./components/RequestDetails.tsx";
+import PaymentForm from "./components/PaymentForm";
+import RequestDetails from "./components/RequestDetails";
+import App from "./App";
 
 import "./index.css";
-import App from "./App.tsx";
 
 const router = createBrowserRouter([
 	{
-		path: "/payment-form/",
+		path: "/",
 		element: <App />,
 		children: [
 			{
-				path: "/payment-form/",
+				index: true,
 				element: <PaymentForm />,
 			},
 			{
-				path: "/payment-form/request-details",
+				path: "request-details",
 				element: <RequestDetails />,
 			},
 		],
