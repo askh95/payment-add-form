@@ -1,30 +1,32 @@
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import App from "./App";
-import PaymentForm from "./components/PaymentForm";
-import RequestDetails from "./components/RequestDetails";
+import PaymentForm from "./components/PaymentForm.tsx";
+import RequestDetails from "./components/RequestDetails.tsx";
 
 import "./index.css";
+import App from "./App.tsx";
 
-const RootWrapper = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/payment-form" element={<App />}>
-					<Route index element={<PaymentForm />} />
-					<Route path="request-details" element={<RequestDetails />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
-	);
-};
+const router = createBrowserRouter([
+	{
+		path: "/payment-form/",
+		element: <App />,
+		children: [
+			{
+				path: "/payment-form/",
+				element: <PaymentForm />,
+			},
+			{
+				path: "/payment-form/request-details",
+				element: <RequestDetails />,
+			},
+		],
+	},
+]);
 
-const mountPoint = document.getElementById("root");
-if (!mountPoint) {
-	throw new Error("Root element not found in document");
-}
-
-const rootInstance = createRoot(mountPoint);
-
-rootInstance.render(<RootWrapper />);
+createRoot(document.getElementById("root")!).render(
+	<StrictMode>
+		<RouterProvider router={router} />
+	</StrictMode>
+);
